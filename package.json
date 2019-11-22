@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Building intuition in orbital mechanics.",
     "scripts": {
-        "build": "rm -Rf dist && mkdir dist && cp src/index.html dist && webpack",
+        "build": "rm -Rf dist && mkdir dist && cp src/index.* dist && webpack",
         "start": "npm run build & reload -bd dist",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
