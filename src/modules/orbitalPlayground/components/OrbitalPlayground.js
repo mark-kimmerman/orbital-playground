@@ -17,8 +17,22 @@ export default function OrbitalPlayground(props) {
     svg.appendChild(Background({width, height}));
 
     const bodies = [
-        Earth({parentWidth: width, parentHeight: height}),
-        SpaceStation({parentWidth: width, parentHeight: height}),
+        Earth({
+            parentWidth: width,
+            parentHeight: height,
+            startingPosition: {
+                distance: 0,
+                angle: 0,
+            },
+        }),
+        SpaceStation({
+            parentWidth: width,
+            parentHeight: height,
+            startingPosition: {
+                distance: 100,
+                angle: 0,
+            },
+        }),
     ];
 
     window.bodies = bodies;
