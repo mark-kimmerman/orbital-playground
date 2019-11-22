@@ -1,3 +1,4 @@
 import * as components from './components';
+import * as systems from './systems';
 
-export default {components};
+export default {components, systems};

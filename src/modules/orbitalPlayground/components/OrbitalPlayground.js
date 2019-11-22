@@ -1,6 +1,7 @@
 import {buildSvgElement} from 'modules/svgElements/systems';
+import {updateBodies} from 'modules/bodies/systems';
 import {Background} from 'modules/orbitalPlayground/components';
-import {SpaceStation} from 'modules/bodies/components';
+import {Earth, SpaceStation} from 'modules/bodies/components';
 
 export default function OrbitalPlayground(props) {
     const width = window.innerWidth;
@@ -14,7 +15,19 @@ export default function OrbitalPlayground(props) {
     });
 
     svg.appendChild(Background({width, height}));
-    svg.appendChild(SpaceStation());
+
+    const bodies = [
+        Earth({parentWidth: width, parentHeight: height}),
+        SpaceStation({parentWidth: width, parentHeight: height}),
+    ];
+
+    window.bodies = bodies;
+
+    bodies.forEach(body => svg.appendChild(body));
+
+    setInterval(() => {
+        updateBodies(bodies);
+    }, 100);
 
     return svg;
 }
