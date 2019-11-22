@@ -1,0 +1,10 @@
+{
+    "name": "orbital-playground",
+    "version": "1.0.0",
+    "description": "Building intuition in orbital mechanics.",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Mark Timmerman",
+    "license": "ISC"
+}
