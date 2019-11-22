@@ -1,12 +1,11 @@
-export default function SpaceStation(props) {
-    const spaceStation = document.createElementNS(
-        'http://www.w3.org/2000/svg',
-        'rect'
-    );
+import {buildSvgElement} from 'modules/svgElements/systems';
 
-    spaceStation.setAttribute('width', 60);
-    spaceStation.setAttribute('height', 30);
-    spaceStation.setAttribute('fill', 'orange');
+export default function SpaceStation(props) {
+    const spaceStation = buildSvgElement('rect', {
+        width: 60,
+        height: 30,
+        fill: 'orange',
+    });
 
     return spaceStation;
 }
