@@ -35,12 +35,10 @@ export default function OrbitalPlayground(props) {
         }),
     ];
 
-    window.bodies = bodies;
-
     bodies.forEach(body => svg.appendChild(body.node));
 
     setInterval(() => {
-        updateBodies(bodies);
+        window.bodies = updateBodies(bodies);
     }, 100);
 
     return svg;

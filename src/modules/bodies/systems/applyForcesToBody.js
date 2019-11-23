@@ -1,7 +1,4 @@
-import {
-    convertPolarToCartesian,
-    convertCartesianToPolar,
-} from 'modules/geometry/systems';
+import {addVectors} from 'modules/geometry/systems';
 
 export default function applyForcesToBody({body, forces}) {
     body.state.acceleration = {
@@ -15,21 +12,9 @@ export default function applyForcesToBody({body, forces}) {
 }
 
 function applyForceToBody({body, force}) {
-    const bodyAccelerationInCartesian = convertPolarToCartesian(
-        body.state.acceleration
-    );
-    const accelerationChangeInCartesian = convertPolarToCartesian({
+    body.state.acceleration = addVectors(body.state.acceleration, {
         magnitude: force.magnitude / body.state.mass,
         angle: force.angle,
     });
-
-    const updatedBodyAccelerationInCartesian = {
-        x: bodyAccelerationInCartesian.x + accelerationChangeInCartesian.x,
-        y: bodyAccelerationInCartesian.y + accelerationChangeInCartesian.y,
-    };
-
-    body.state.acceleration = convertCartesianToPolar(
-        updatedBodyAccelerationInCartesian
-    );
     return body;
 }

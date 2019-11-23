@@ -8,7 +8,6 @@ npm start
 
 ## To do
 
--   [ ] Use forces to update acceleration to update velocity to update position
 -   [ ] Update SVG position from polar coordinates
 -   [ ] Set SVG position (transform→translate?) from polar coordinates
 -   [ ] Set actual values for Earth's radius & spacestation orbit height
@@ -26,3 +25,4 @@ npm start
 -   [x] Calculate gravitational forces on an object
 -   [x] Store body position, velocity, and acceleration as vectors
 -   [x] Use position to calculate gravitational force vectors
+-   [x] Use forces to update acceleration to update velocity to update position

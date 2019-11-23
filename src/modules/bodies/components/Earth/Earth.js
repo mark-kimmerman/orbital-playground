@@ -29,6 +29,7 @@ export default function Earth(props) {
             angle: 0,
             magnitude: 0,
         },
+        timestampOfLastUpdate: Date.now(),
     };
 
     return {

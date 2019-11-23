@@ -31,8 +31,9 @@ export default function SpaceStation(props) {
         position: {
             angle: 90,
             magnitude: 100,
-            magnitude: RADIUS_OF_EARTH, // + 2414016,
+            magnitude: RADIUS_OF_EARTH,
         },
+        timestampOfLastUpdate: Date.now(),
     };
 
     return {
