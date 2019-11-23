@@ -8,11 +8,9 @@ npm start
 
 ## To do
 
--   [ ] Store position of each body in polar coordinates
--   [ ] Set SVG position (transform→translate?) from polar coordinates
--   [ ] Update a body's polar coordinates and then update SVG position
--   [ ] Use position to calculate gravitational forces, with angle
 -   [ ] Use forces to update acceleration to update velocity to update position
+-   [ ] Update SVG position from polar coordinates
+-   [ ] Set SVG position (transform→translate?) from polar coordinates
 -   [ ] Set actual values for Earth's radius & spacestation orbit height
 -   [ ] Use camera frame to keep everything in view
 -   [ ] Make the spacestation orbit
@@ -26,3 +24,5 @@ npm start
 -   [x] Render an SVG to the screen.
 -   [x] Render an object in the SVG that changes with clock ticks.
 -   [x] Calculate gravitational forces on an object
+-   [x] Store body position, velocity, and acceleration as vectors
+-   [x] Use position to calculate gravitational force vectors
