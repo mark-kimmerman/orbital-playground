@@ -1,18 +1,20 @@
 import {buildSvgElement} from 'modules/svgElements/systems';
 
+const RADIUS_OF_EARTH = 6378.1 * 1000;
 const MASS_OF_EARTH = 5.972 * Math.pow(10, 24);
 
 export default function Earth(props) {
-    const {parentWidth, parentHeight, startingPosition} = props;
+    const {startingPosition} = props;
 
-    const x = parentWidth / 2;
-    const y = parentWidth * 0.8 + parentHeight;
+    const dimensions = {
+        type: 'circle',
+        radius: RADIUS_OF_EARTH,
+    };
 
     const node = buildSvgElement('circle', {
-        r: parentWidth,
+        r: 0,
         stroke: 'cyan',
         fill: 'none',
-        transform: `translate(${x}, ${y})`,
     });
 
     const state = {
@@ -34,6 +36,7 @@ export default function Earth(props) {
 
     return {
         name: 'Earth',
+        dimensions,
         node,
         state,
     };
