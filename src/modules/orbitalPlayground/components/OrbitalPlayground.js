@@ -35,7 +35,10 @@ export default function OrbitalPlayground(props) {
     };
 
     setInterval(() => {
-        window.bodies = updateBodies(bodies);
+        window.bodies = updateBodies({
+            bodies,
+            timeScalar: 500,
+        });
         updateBodyNodesInPerspective({bodies, perspective});
     }, 100);
 

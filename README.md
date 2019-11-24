@@ -8,7 +8,6 @@ npm start
 
 ## To do
 
--   [ ] Control the speed of time
 -   [ ] Make the spacestation orbit
 -   [ ] Toggle between camera views (track a body, whole view)
 -   [ ] Convert to Typescript
@@ -25,3 +24,4 @@ npm start
 -   [x] Use forces to update acceleration to update velocity to update position
 -   [x] Use perspective to keep everything in view
 -   [x] Set actual values for Earth's radius & spacestation orbit height
+-   [x] Control the speed of time

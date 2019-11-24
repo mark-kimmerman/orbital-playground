@@ -4,15 +4,17 @@ import {
 } from 'modules/bodies/systems';
 import {addVectors, scaleVector} from 'modules/geometry/systems';
 
-export default function updateBodies(bodies) {
-    return bodies.map(updateBody);
+export default function updateBodies({bodies, timeScalar}) {
+    return bodies.map((body, indexOfBody) =>
+        updateBody({body, indexOfBody, bodies, timeScalar})
+    );
 }
 
-function updateBody(body, index, bodies) {
-    const otherBodies = filterIndexFromList(index, bodies);
+function updateBody({body, indexOfBody, bodies, timeScalar}) {
+    const otherBodies = filterIndexFromList(indexOfBody, bodies);
     const forces = calculateGravitationalForcesOnBody({body, otherBodies});
 
-    const bodyWithUpdatedTimeframe = updateTimeframe(body);
+    const bodyWithUpdatedTimeframe = updateTimeframe(body, timeScalar);
     const bodyWithUpdatedAcceleration = applyForcesToBody({
         body: bodyWithUpdatedTimeframe,
         forces,
@@ -27,11 +29,11 @@ function updateBody(body, index, bodies) {
     return bodyWithUpdatedPosition;
 }
 
-function updateTimeframe(body) {
+function updateTimeframe(body, timeScalar = 1) {
     const currentTime = Date.now();
     const secondsSinceLastUpdate =
         (currentTime - body.state.timestampOfLastUpdate) / 1000;
-    body.state.timeframeInSeconds = secondsSinceLastUpdate;
+    body.state.timeframeInSeconds = secondsSinceLastUpdate * timeScalar;
     body.state.timestampOfLastUpdate = currentTime;
     return body;
 }
