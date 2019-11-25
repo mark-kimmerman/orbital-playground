@@ -32,11 +32,11 @@ export default function SpaceStation(props) {
             magnitude: 0,
         },
         velocity: {
-            angle: 0,
-            magnitude: 0,
+            angle: 90,
+            magnitude: 7000,
         },
         position: {
-            angle: 90,
+            angle: 0,
             magnitude: RADIUS_OF_EARTH + LOW_EARTH_ORBIT_MIDPOINT_ALTITUDE,
         },
         timestampOfLastUpdate: Date.now(),

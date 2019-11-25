@@ -12,5 +12,6 @@ export default function addVectors(firstVector, secondVector) {
         y: firstVectorInCartesian.y + secondVectorInCartesian.y,
     };
 
-    return convertCartesianToPolar(vectorSumInCartesian);
+    const vectorSumInPolar = convertCartesianToPolar(vectorSumInCartesian);
+    return vectorSumInPolar;
 }

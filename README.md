@@ -8,11 +8,11 @@ npm start
 
 ## To do
 
--   [ ] Make the spacestation orbit
+-   [ ] Fix the "game clock" so the timeframe for each body is equal
 -   [ ] Toggle between camera views (track a body, whole view)
--   [ ] Convert to Typescript
 -   [ ] Add in a spaceship
 -   [ ] Add front and side thrusters to the spaceship
+-   [ ] Convert to Typescript
 
 # Done
 
@@ -25,3 +25,4 @@ npm start
 -   [x] Use perspective to keep everything in view
 -   [x] Set actual values for Earth's radius & spacestation orbit height
 -   [x] Control the speed of time
+-   [x] Make the space station orbit
