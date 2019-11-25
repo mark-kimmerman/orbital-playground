@@ -9,6 +9,8 @@ npm start
 ## To do
 
 -   [ ] Fix the "game clock" so the timeframe for each body is equal
+-   [ ] Add rotation to bodies
+-   [ ] Make sure the bodies are centered around their center
 -   [ ] Toggle between camera views (track a body, whole view)
 -   [ ] Add in a spaceship
 -   [ ] Add front and side thrusters to the spaceship

@@ -48,7 +48,8 @@ function translateBodyInPerspective({body, perspective}) {
     body.node.setAttribute(
         'transform',
         `translate(
-            ${centerOfElement.x + offset.x}, ${centerOfElement.y - offset.y}
+            ${centerOfElement.x + offset.x},
+            ${centerOfElement.y - offset.y}
         )`
     );
 }
