@@ -59,12 +59,15 @@ function buildTranslateBodyInPerspectiveOffset({body, perspective}) {
         perspective
     );
     const angleInRadians = convertDegreesToRadians(body.state.position.angle);
+    const offsetToCenter = body.dimensions.offsetToCenter || {x: 0, y: 0};
     return {
         x: mapViewDimensionToElementDimension(
-            body.state.position.magnitude * Math.cos(angleInRadians)
+            body.state.position.magnitude * Math.cos(angleInRadians) -
+                offsetToCenter.x
         ),
         y: mapViewDimensionToElementDimension(
-            body.state.position.magnitude * Math.sin(angleInRadians)
+            body.state.position.magnitude * Math.sin(angleInRadians) +
+                offsetToCenter.y
         ),
     };
 }

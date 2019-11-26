@@ -14,10 +14,17 @@ const ISS_ORBIT_ALTITUDE = 408000;
 export default function SpaceStation(props) {
     const {startingPosition} = props;
 
+    const width = 109 * (IS_VOLUME_EXAGGERATED ? VOLUME_EXAGERATION_SCALAR : 1);
+    const height = 51 * (IS_VOLUME_EXAGGERATED ? VOLUME_EXAGERATION_SCALAR : 1);
+
     const dimensions = {
         type: 'rectangle',
-        width: 109 * (IS_VOLUME_EXAGGERATED ? VOLUME_EXAGERATION_SCALAR : 1),
-        height: 51 * (IS_VOLUME_EXAGGERATED ? VOLUME_EXAGERATION_SCALAR : 1),
+        width,
+        height,
+        offsetToCenter: {
+            x: width / 2,
+            y: height / 2,
+        },
     };
 
     const node = buildSvgElement('rect', {
@@ -34,11 +41,11 @@ export default function SpaceStation(props) {
         },
         velocity: {
             angle: 90,
-            magnitude: 7660,
+            magnitude: 7000,
         },
         position: {
             angle: 0,
-            magnitude: RADIUS_OF_EARTH + ISS_ORBIT_ALTITUDE,
+            magnitude: RADIUS_OF_EARTH + LOW_EARTH_ORBIT_MIDPOINT_ALTITUDE,
         },
         timestampOfLastUpdate: Date.now(),
     };

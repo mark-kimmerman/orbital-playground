@@ -33,6 +33,9 @@ function calculateMagnitudeOfGravitationalForce(firstBody, secondBody) {
         firstBody.state.position,
         secondBody.state.position
     );
+    if (distanceBetweenBodies === 0) {
+        return 0;
+    }
     return (
         (G * firstBodyMass * secondBodyMass) /
         Math.pow(distanceBetweenBodies, 2)
