@@ -1,7 +1,7 @@
 import {buildSvgElement} from 'modules/svgElements/systems';
 import {updateBodies} from 'modules/bodies/systems';
 import {Background} from 'modules/orbitalPlayground/components';
-import {Earth, SpaceStation} from 'modules/bodies/components';
+import {Earth, Spaceship, SpaceStation} from 'modules/bodies/components';
 import {updateBodyNodesInPerspective} from 'modules/perspective/systems';
 
 export default function OrbitalPlayground(props) {
@@ -17,12 +17,11 @@ export default function OrbitalPlayground(props) {
 
     svg.appendChild(Background({width, height}));
 
-    const earth = Earth({startingPosition: {distance: 0, angle: 0}});
-    const spaceStation = SpaceStation({
-        startingPosition: {distance: 100, angle: 0},
-    });
+    const earth = Earth();
+    const spaceStation = SpaceStation();
+    const spaceship = Spaceship();
 
-    const bodies = [earth, spaceStation];
+    const bodies = [earth, spaceStation, spaceship];
     bodies.forEach(body => svg.appendChild(body.node));
 
     const viewRadius = spaceStation.state.position.magnitude * 1.2;

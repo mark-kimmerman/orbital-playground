@@ -1,13 +1,9 @@
 import {buildSvgElement} from 'modules/svgElements/systems';
 
-const RADIUS_OF_EARTH = 6378.1 * 1000;
-const MASS_OF_EARTH = 5.972 * Math.pow(10, 24);
+import {RADIUS_OF_EARTH, MASS_OF_EARTH} from 'modules/bodies/constants';
 
 export default function Earth(props) {
-    const {startingPosition} = props;
-
     const dimensions = {
-        type: 'circle',
         radius: RADIUS_OF_EARTH,
     };
 
@@ -34,10 +30,16 @@ export default function Earth(props) {
         timestampOfLastUpdate: Date.now(),
     };
 
+    const updateSize = (body, scaleToDisplay) => {
+        const radius = scaleToDisplay(body.dimensions.radius);
+        body.node.setAttribute('r', radius);
+    };
+
     return {
         name: 'Earth',
         dimensions,
         node,
         state,
+        updateSize,
     };
 }

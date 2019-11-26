@@ -6,24 +6,12 @@ export default function updateBodyNodesInPerspective({bodies, perspective}) {
 }
 
 function updateBodyNodeInPerspective({body, perspective}) {
-    if (body.dimensions.type === 'circle') {
-        return updateCircularBodyInPerspective({body, perspective});
-    }
-    if (body.dimensions.type === 'rectangle') {
-        return updateRectangularBodyInPerspective({body, perspective});
-    }
-}
-
-function updateCircularBodyInPerspective({body, perspective}) {
-    const mapViewDimensionToElementDimension = buildDimensionScaleFromPerspective(
-        perspective
-    );
-    const radius = mapViewDimensionToElementDimension(body.dimensions.radius);
-    body.node.setAttribute('r', radius);
+    const scaleToDisplay = buildScaleToDisplay(perspective);
+    body.updateSize(body, scaleToDisplay);
     translateBodyInPerspective({body, perspective});
 }
 
-function buildDimensionScaleFromPerspective(perspective) {
+function buildScaleToDisplay(perspective) {
     const lesserOfElementWidthAndHeight = getLesserOfPerspectiveElementWidthOrHeight(
         perspective
     );
@@ -55,11 +43,9 @@ function translateBodyInPerspective({body, perspective}) {
 }
 
 function buildTranslateBodyInPerspectiveOffset({body, perspective}) {
-    const mapViewDimensionToElementDimension = buildDimensionScaleFromPerspective(
-        perspective
-    );
+    const mapViewDimensionToElementDimension = buildScaleToDisplay(perspective);
     const angleInRadians = convertDegreesToRadians(body.state.position.angle);
-    const offsetToCenter = body.dimensions.offsetToCenter || {x: 0, y: 0};
+    const offsetToCenter = getBodyOffsetToCenter(body);
     return {
         x: mapViewDimensionToElementDimension(
             body.state.position.magnitude * Math.cos(angleInRadians) -
@@ -72,14 +58,12 @@ function buildTranslateBodyInPerspectiveOffset({body, perspective}) {
     };
 }
 
-function updateRectangularBodyInPerspective({body, perspective}) {
-    const mapViewDimensionToElementDimension = buildDimensionScaleFromPerspective(
-        perspective
-    );
-    const width = mapViewDimensionToElementDimension(body.dimensions.width);
-    const height = mapViewDimensionToElementDimension(body.dimensions.height);
-    body.node.setAttribute('width', width);
-    body.node.setAttribute('height', height);
-
-    translateBodyInPerspective({body, perspective});
+function getBodyOffsetToCenter(body) {
+    if (body.dimensions.getOffsetToCenter) {
+        return body.dimensions.getOffsetToCenter(body);
+    }
+    return {
+        x: 0,
+        y: 0,
+    };
 }
