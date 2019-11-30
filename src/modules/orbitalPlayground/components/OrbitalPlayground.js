@@ -3,7 +3,11 @@ import {updateBodies} from 'modules/bodies/systems';
 import {Background} from 'modules/orbitalPlayground/components';
 import {initializeKeyListeners} from 'modules/orbitalPlayground/systems';
 import {Earth, Spaceship, SpaceStation} from 'modules/bodies/components';
-import {updateBodyNodesInPerspective} from 'modules/perspective/systems';
+import {Perspective} from 'modules/perspective/components';
+import {
+    updatePerspectiveNode,
+    updateBodyNodesInPerspective,
+} from 'modules/perspective/systems';
 
 export default function OrbitalPlayground(props) {
     const width = window.innerWidth;
@@ -21,26 +25,28 @@ export default function OrbitalPlayground(props) {
     const earth = Earth();
     const spaceStation = SpaceStation();
     const spaceship = Spaceship();
-
     const bodies = [earth, spaceStation, spaceship];
-    bodies.forEach(body => svg.appendChild(body.node));
 
-    const viewRadius = spaceStation.state.position.magnitude * 1.2;
-    const perspective = {
+    const perspective = Perspective({
         element: {width, height},
         view: {
             position: {distance: 0, angle: 0},
-            radius: viewRadius,
+            radius: spaceStation.state.position.magnitude * 1.2,
         },
-    };
+    });
+
+    svg.appendChild(perspective.node);
+    bodies.forEach(body => perspective.node.appendChild(body.node));
 
     setInterval(() => {
         perspective.view.radius = spaceship.state.position.magnitude * 1.2;
+        perspective.view.position.angle = spaceship.state.position.angle + 270;
         window.bodies = updateBodies({
             bodies,
             timeScalar: 200,
         });
         updateBodyNodesInPerspective({bodies, perspective});
+        updatePerspectiveNode(perspective);
     }, 10);
 
     initializeKeyListeners([].concat(bodies, perspective));

@@ -6,3 +6,4 @@ export {default as buildTranslateString} from './buildTranslateString';
 export {
     default as updateBodyNodesInPerspective,
 } from './updateBodyNodesInPerspective';
+export {default as updatePerspectiveNode} from './updatePerspectiveNode';

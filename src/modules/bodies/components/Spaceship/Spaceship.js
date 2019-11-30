@@ -7,7 +7,19 @@ import {
 } from 'modules/bodies/constants';
 
 export default function Spaceship(props) {
-    const dimensions = {
+    const spaceship = {
+        name: 'Spaceship',
+        dimensions: buildDimensions(),
+        state: buildState(),
+        node: buildNode(),
+        updateSize: buildUpdateSize(),
+    };
+    spaceship.keyEventHandlers = buildKeyEventHandlers(spaceship);
+    return spaceship;
+}
+
+function buildDimensions() {
+    return {
         width: 50 * (IS_VOLUME_EXAGGERATED ? VOLUME_EXAGERATION_SCALAR : 1),
         height: 100 * (IS_VOLUME_EXAGGERATED ? VOLUME_EXAGERATION_SCALAR : 1),
         getOffsetToCenter: body => ({
@@ -15,13 +27,10 @@ export default function Spaceship(props) {
             y: body.dimensions.height / 2,
         }),
     };
+}
 
-    const node = buildSvgElement('polygon', {
-        points: '',
-        fill: 'yellow',
-    });
-
-    const state = {
+function buildState() {
+    return {
         mass: 10000,
         acceleration: {
             angle: 0,
@@ -37,7 +46,7 @@ export default function Spaceship(props) {
         },
         rotation: {
             angularAcceleration: 0,
-            angularVelocity: -0.03,
+            angularVelocity: -0.1,
             angle: 0,
         },
         thrusters: {
@@ -47,8 +56,17 @@ export default function Spaceship(props) {
         },
         timestampOfLastUpdate: Date.now(),
     };
+}
 
-    const updateSize = (body, scaleDimensionToDisplay) => {
+function buildNode() {
+    return buildSvgElement('polygon', {
+        points: '',
+        fill: 'yellow',
+    });
+}
+
+function buildUpdateSize() {
+    return (body, scaleDimensionToDisplay) => {
         const width = scaleDimensionToDisplay(body.dimensions.width);
         const height = scaleDimensionToDisplay(body.dimensions.height);
         const points = buildPointsFromWidthAndHeight(width, height);
@@ -57,39 +75,36 @@ export default function Spaceship(props) {
             .join(' ');
         body.node.setAttribute('points', pointsString);
     };
+}
 
-    function buildPointsFromWidthAndHeight(width, height) {
-        const points = [{x: 0.5, y: 0.0}, {x: 0.0, y: 1.0}, {x: 1.0, y: 1.0}];
-        return points.map(point => ({
-            x: point.x * width,
-            y: point.y * height,
-        }));
-    }
+function buildPointsFromWidthAndHeight(width, height) {
+    const points = [{x: 0.5, y: 0.0}, {x: 0.0, y: 1.0}, {x: 1.0, y: 1.0}];
+    return points.map(point => ({
+        x: point.x * width,
+        y: point.y * height,
+    }));
+}
 
-    const keyEventHandlers = [
+function buildKeyEventHandlers(spaceship) {
+    return [
         {
             key: 'a',
-            down: () => (state.thrusters.isLeftThrusterEngaged = true),
-            up: () => (state.thrusters.isLeftThrusterEngaged = false),
+            down: () =>
+                (spaceship.state.thrusters.isLeftThrusterEngaged = true),
+            up: () => (spaceship.state.thrusters.isLeftThrusterEngaged = false),
         },
         {
             key: 'd',
-            down: () => (state.thrusters.isRightThrusterEngaged = true),
-            up: () => (state.thrusters.isRightThrusterEngaged = false),
+            down: () =>
+                (spaceship.state.thrusters.isRightThrusterEngaged = true),
+            up: () =>
+                (spaceship.state.thrusters.isRightThrusterEngaged = false),
         },
         {
             key: 'w',
-            down: () => (state.thrusters.isMainThrusterEngaged = true),
-            up: () => (state.thrusters.isMainThrusterEngaged = false),
+            down: () =>
+                (spaceship.state.thrusters.isMainThrusterEngaged = true),
+            up: () => (spaceship.state.thrusters.isMainThrusterEngaged = false),
         },
     ];
-
-    return {
-        name: 'Spaceship',
-        dimensions,
-        node,
-        state,
-        keyEventHandlers,
-        updateSize,
-    };
 }

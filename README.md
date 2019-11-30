@@ -30,3 +30,4 @@ npm start
 -   [x] Add in a spaceship
 -   [x] Add front and side thrusters to the spaceship
 -   [x] Add rotation to bodies
+-   [x] Fix perspective on body
