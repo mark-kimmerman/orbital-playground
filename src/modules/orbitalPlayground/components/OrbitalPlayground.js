@@ -1,6 +1,7 @@
 import {buildSvgElement} from 'modules/svgElements/systems';
 import {updateBodies} from 'modules/bodies/systems';
 import {Background} from 'modules/orbitalPlayground/components';
+import {initializeKeyListeners} from 'modules/orbitalPlayground/systems';
 import {Earth, Spaceship, SpaceStation} from 'modules/bodies/components';
 import {updateBodyNodesInPerspective} from 'modules/perspective/systems';
 
@@ -34,12 +35,15 @@ export default function OrbitalPlayground(props) {
     };
 
     setInterval(() => {
+        perspective.view.radius = spaceship.state.position.magnitude * 1.2;
         window.bodies = updateBodies({
             bodies,
-            timeScalar: 500,
+            timeScalar: 200,
         });
         updateBodyNodesInPerspective({bodies, perspective});
     }, 10);
+
+    initializeKeyListeners([].concat(bodies, perspective));
 
     return svg;
 }

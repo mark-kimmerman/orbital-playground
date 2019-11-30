@@ -30,8 +30,8 @@ export default function Earth(props) {
         timestampOfLastUpdate: Date.now(),
     };
 
-    const updateSize = (body, scaleToDisplay) => {
-        const radius = scaleToDisplay(body.dimensions.radius);
+    const updateSize = (body, scaleDimensionToDisplay) => {
+        const radius = scaleDimensionToDisplay(body.dimensions.radius);
         body.node.setAttribute('r', radius);
     };
 

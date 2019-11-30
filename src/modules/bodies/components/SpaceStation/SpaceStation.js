@@ -39,9 +39,9 @@ export default function SpaceStation(props) {
         timestampOfLastUpdate: Date.now(),
     };
 
-    const updateSize = (body, scaleToDisplay) => {
-        const width = scaleToDisplay(body.dimensions.width);
-        const height = scaleToDisplay(body.dimensions.height);
+    const updateSize = (body, scaleDimensionToDisplay) => {
+        const width = scaleDimensionToDisplay(body.dimensions.width);
+        const height = scaleDimensionToDisplay(body.dimensions.height);
         body.node.setAttribute('width', width);
         body.node.setAttribute('height', height);
     };

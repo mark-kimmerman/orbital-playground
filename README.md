@@ -8,9 +8,8 @@ npm start
 
 ## To do
 
--   [ ] Add front and side thrusters to the spaceship
--   [ ] Add rotation to bodies
--   [ ] Fix the "game clock" so the timeframe for each body is equal (integrals?)
+-   [ ] Render the thrusters when they are firing
+-   [ ] Fix the "game clock" so the timeframe for each body is equal (integrals? rename timeScalar)
 -   [ ] Toggle between camera views (track a body, whole view)
 -   [ ] Add collision detection
 -   [ ] Convert to Typescript
@@ -29,3 +28,5 @@ npm start
 -   [x] Make the space station orbit
 -   [x] Make sure the bodies are centered around their center
 -   [x] Add in a spaceship
+-   [x] Add front and side thrusters to the spaceship
+-   [x] Add rotation to bodies

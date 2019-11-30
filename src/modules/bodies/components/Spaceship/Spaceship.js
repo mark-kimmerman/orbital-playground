@@ -28,19 +28,29 @@ export default function Spaceship(props) {
             magnitude: 0,
         },
         velocity: {
-            angle: 105,
+            angle: 75,
             magnitude: 7200,
         },
         position: {
-            angle: 15,
+            angle: 345,
             magnitude: RADIUS_OF_EARTH + ALTITUDE,
+        },
+        rotation: {
+            angularAcceleration: 0,
+            angularVelocity: -0.03,
+            angle: 0,
+        },
+        thrusters: {
+            isLeftThrusterEngaged: false,
+            isRightThrusterEngaged: false,
+            isMainThrusterEngaged: false,
         },
         timestampOfLastUpdate: Date.now(),
     };
 
-    const updateSize = (body, scaleToDisplay) => {
-        const width = scaleToDisplay(body.dimensions.width);
-        const height = scaleToDisplay(body.dimensions.height);
+    const updateSize = (body, scaleDimensionToDisplay) => {
+        const width = scaleDimensionToDisplay(body.dimensions.width);
+        const height = scaleDimensionToDisplay(body.dimensions.height);
         const points = buildPointsFromWidthAndHeight(width, height);
         const pointsString = points
             .map(point => `${point.x},${point.y}`)
@@ -56,11 +66,30 @@ export default function Spaceship(props) {
         }));
     }
 
+    const keyEventHandlers = [
+        {
+            key: 'a',
+            down: () => (state.thrusters.isLeftThrusterEngaged = true),
+            up: () => (state.thrusters.isLeftThrusterEngaged = false),
+        },
+        {
+            key: 'd',
+            down: () => (state.thrusters.isRightThrusterEngaged = true),
+            up: () => (state.thrusters.isRightThrusterEngaged = false),
+        },
+        {
+            key: 'w',
+            down: () => (state.thrusters.isMainThrusterEngaged = true),
+            up: () => (state.thrusters.isMainThrusterEngaged = false),
+        },
+    ];
+
     return {
         name: 'Spaceship',
         dimensions,
         node,
         state,
+        keyEventHandlers,
         updateSize,
     };
 }
