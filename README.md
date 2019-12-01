@@ -8,6 +8,7 @@ npm start
 
 ## To do
 
+-   [ ] Support the ability to move the perspective
 -   [ ] Render the thrusters when they are firing
 -   [ ] Fix the "game clock" so the timeframe for each body is equal (integrals? rename timeScalar)
 -   [ ] Toggle between camera views (track a body, whole view)

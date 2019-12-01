@@ -2,12 +2,16 @@ import {buildSvgElement} from 'modules/svgElements/systems';
 import {updateBodies} from 'modules/bodies/systems';
 import {Background} from 'modules/orbitalPlayground/components';
 import {initializeKeyListeners} from 'modules/orbitalPlayground/systems';
-import {Earth, Spaceship, SpaceStation} from 'modules/bodies/components';
+import {Earth, Moon, Spaceship, SpaceStation} from 'modules/bodies/components';
 import {Perspective} from 'modules/perspective/components';
 import {
     updatePerspectiveNode,
     updateBodyNodesInPerspective,
 } from 'modules/perspective/systems';
+import {
+    RADIUS_OF_EARTH,
+    MOON_ORBITAL_DISTANCE_FROM_EARTH,
+} from 'modules/bodies/constants';
 
 export default function OrbitalPlayground(props) {
     const width = window.innerWidth;
@@ -25,7 +29,8 @@ export default function OrbitalPlayground(props) {
     const earth = Earth();
     const spaceStation = SpaceStation();
     const spaceship = Spaceship();
-    const bodies = [earth, spaceStation, spaceship];
+    const moon = Moon();
+    const bodies = [earth, spaceStation, spaceship, moon];
 
     const perspective = Perspective({
         element: {width, height},
@@ -39,8 +44,9 @@ export default function OrbitalPlayground(props) {
     bodies.forEach(body => perspective.node.appendChild(body.node));
 
     setInterval(() => {
-        perspective.view.radius = spaceship.state.position.magnitude * 1.2;
-        perspective.view.position.angle = spaceship.state.position.angle + 270;
+        perspective.view.radius = spaceship.state.position.magnitude * 1.1;
+        perspective.view.position = moon.state.position;
+        // perspective.view.position.angle = spaceship.state.position.angle + 270;
         window.bodies = updateBodies({
             bodies,
             timeScalar: 200,
