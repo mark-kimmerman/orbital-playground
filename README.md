@@ -2,6 +2,14 @@
 
 ## Running it locally
 
+Install it:
+
+```bash
+npm install
+```
+
+Run it
+
 ```bash
 npm start
 ```
